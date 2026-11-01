@@ -1,0 +1,114 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *left,*right;
+};
+
+struct node *root=NULL;
+
+struct node* create()
+{
+    int x;
+    struct node *newnode;
+
+    printf("\nEnter value (-1 for no node): ");
+    scanf("%d",&x);
+
+    if(x==-1)
+        return NULL;
+
+    newnode=(struct node*)malloc(sizeof(struct node));
+
+    newnode->data=x;
+
+    printf("\nEnter left child of %d",x);
+    newnode->left=create();
+
+    printf("\nEnter right child of %d",x);
+    newnode->right=create();
+
+    return newnode;
+}
+
+void inorder(struct node *temp)
+{
+    if(temp!=NULL)
+    {
+        inorder(temp->left);
+        printf("%d ",temp->data);
+        inorder(temp->right);
+    }
+}
+
+void preorder(struct node *temp)
+{
+    if(temp!=NULL)
+    {
+        printf("%d ",temp->data);
+        preorder(temp->left);
+        preorder(temp->right);
+    }
+}
+
+void postorder(struct node *temp)
+{
+    if(temp!=NULL)
+    {
+        postorder(temp->left);
+        postorder(temp->right);
+        printf("%d ",temp->data);
+    }
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n\nHOSPITAL DEPARTMENT TREE");
+        printf("\n1. Create Tree");
+        printf("\n2. Inorder Traversal");
+        printf("\n3. Preorder Traversal");
+        printf("\n4. Postorder Traversal");
+        printf("\n5. Exit");
+        printf("\nEnter choice: ");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1:
+                root=create();
+                break;
+
+            case 2:
+                printf("\nInorder: ");
+                inorder(root);
+                break;
+
+            case 3:
+                printf("\nPreorder: ");
+                preorder(root);
+                break;
+
+            case 4:
+                printf("\nPostorder: ");
+                postorder(root);
+                break;
+
+            case 5:
+                printf("\nExit");
+                break;
+
+            default:
+                printf("\nInvalid Choice");
+        }
+    }while(ch!=5);
+
+    getch();
+}
