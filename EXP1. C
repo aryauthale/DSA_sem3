@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<conio.h>
+
+int stack[50],top=-1;
+
+void push()
+{
+    int x;
+    if(top==49)
+        printf("\nStack Overflow");
+    else
+    {
+        printf("\nEnter test value: ");
+        scanf("%d",&x);
+        top++;
+        stack[top]=x;
+        printf("\nTest value added");
+    }
+}
+
+void pop()
+{
+    if(top==-1)
+        printf("\nStack Underflow");
+    else
+    {
+        printf("\nRemoved test value: %d",stack[top]);
+        top--;
+    }
+}
+
+void peek()
+{
+    if(top==-1)
+        printf("\nStack is Empty");
+    else
+        printf("\nLatest test value: %d",stack[top]);
+}
+
+void display()
+{
+    int i;
+    if(top==-1)
+        printf("\nNo test records");
+    else
+    {
+        printf("\nUrine Test History:\n");
+        for(i=top;i>=0;i--)
+            printf("%d\n",stack[i]);
+    }
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n\nURINE TEST HISTORY");
+        printf("\n1. Add Test Value");
+        printf("\n2. Remove Latest Test");
+        printf("\n3. View Latest Test");
+        printf("\n4. Display History");
+        printf("\n5. Exit");
+        printf("\nEnter choice: ");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: push(); break;
+            case 2: pop(); break;
+            case 3: peek(); break;
+            case 4: display(); break;
+            case 5: printf("\nExit"); break;
+            default: printf("\nInvalid Choice");
+        }
+    }while(ch!=5);
+
+    getch();
+}
