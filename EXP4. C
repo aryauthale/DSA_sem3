@@ -1,0 +1,118 @@
+#include<stdio.h>
+#include<conio.h>
+
+int dq[50],front=-1,rear=-1;
+
+void insertFront()
+{
+    int x;
+    if(front==0)
+        printf("\nCannot Insert at Front");
+    else
+    {
+        printf("\nEnter Task ID: ");
+        scanf("%d",&x);
+
+        if(front==-1)
+            front=rear=0;
+        else
+            front--;
+
+        dq[front]=x;
+        printf("\nTask Added");
+    }
+}
+
+void insertRear()
+{
+    int x;
+    if(rear==49)
+        printf("\nQueue is Full");
+    else
+    {
+        printf("\nEnter Task ID: ");
+        scanf("%d",&x);
+
+        if(front==-1)
+            front=0;
+
+        rear++;
+        dq[rear]=x;
+        printf("\nTask Added");
+    }
+}
+
+void deleteFront()
+{
+    if(front==-1)
+        printf("\nQueue is Empty");
+    else
+    {
+        printf("\nDeleted Task: %d",dq[front]);
+
+        if(front==rear)
+            front=rear=-1;
+        else
+            front++;
+    }
+}
+
+void deleteRear()
+{
+    if(rear==-1)
+        printf("\nQueue is Empty");
+    else
+    {
+        printf("\nDeleted Task: %d",dq[rear]);
+
+        if(front==rear)
+            front=rear=-1;
+        else
+            rear--;
+    }
+}
+
+void display()
+{
+    int i;
+    if(front==-1)
+        printf("\nQueue is Empty");
+    else
+    {
+        printf("\nHospital Tasks:\n");
+        for(i=front;i<=rear;i++)
+            printf("%d ",dq[i]);
+    }
+}
+
+void main()
+{
+    int ch;
+    clrscr();
+
+    do
+    {
+        printf("\n\nHOSPITAL TASK MANAGEMENT");
+        printf("\n1. Insert Front");
+        printf("\n2. Insert Rear");
+        printf("\n3. Delete Front");
+        printf("\n4. Delete Rear");
+        printf("\n5. Display");
+        printf("\n6. Exit");
+        printf("\nEnter choice: ");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1: insertFront(); break;
+            case 2: insertRear(); break;
+            case 3: deleteFront(); break;
+            case 4: deleteRear(); break;
+            case 5: display(); break;
+            case 6: printf("\nExit"); break;
+            default: printf("\nInvalid Choice");
+        }
+    }while(ch!=6);
+
+    getch();
+}
